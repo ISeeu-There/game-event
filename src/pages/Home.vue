@@ -1,0 +1,916 @@
+<template>
+  <div class="gaming-platform">
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <div class="user-profile">
+          <div class="avatar-wrapper">
+            <v-avatar size="40" class="user-avatar">
+              <v-img
+                src="https://via.placeholder.com/40x40/5865F2/FFFFFF?text=EP"
+                alt="User"
+              ></v-img>
+              <div class="online-dot"></div>
+            </v-avatar>
+          </div>
+          <div class="user-info">
+            <h3 class="username">Epic Packmans</h3>
+            <p class="user-status">Online</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-item active">
+            <v-icon size="20" color="#FFFFFF">mdi-view-dashboard</v-icon>
+            <span>Dashboard</span>
+          </div>
+        </div>
+
+        <div class="nav-section">
+          <div class="section-title">NAVIGATION</div>
+          <div class="nav-item">
+            <v-icon size="20" color="#8E9297">mdi-trophy</v-icon>
+            <span>Tournaments</span>
+            <div class="nav-badge">32</div>
+          </div>
+          <div class="nav-item">
+            <v-icon size="20" color="#8E9297">mdi-gamepad-variant</v-icon>
+            <span>My Games</span>
+          </div>
+          <div class="nav-item">
+            <v-icon size="20" color="#8E9297">mdi-shopping</v-icon>
+            <span>Shop</span>
+          </div>
+          <div class="nav-item">
+            <v-icon size="20" color="#8E9297">mdi-chart-line</v-icon>
+            <span>Leaderboards</span>
+          </div>
+        </div>
+
+        <div class="nav-section">
+          <div class="section-title">COMMUNITY</div>
+          <div class="nav-item">
+            <v-icon size="20" color="#8E9297">mdi-account-group</v-icon>
+            <span>Esports</span>
+          </div>
+          <div class="nav-item">
+            <v-icon size="20" color="#8E9297">mdi-discord</v-icon>
+            <span>Settings</span>
+          </div>
+          <div class="nav-item">
+            <v-icon size="20" color="#8E9297">mdi-account-multiple</v-icon>
+            <span>Membership</span>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Bottom Section -->
+      <div class="sidebar-bottom">
+        <div class="get-started-btn">
+          <v-btn
+            class="premium-btn"
+            size="small"
+            color="#00D4AA"
+            variant="flat"
+          >
+            Get Started
+          </v-btn>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+      <!-- Top Navigation Bar -->
+      <div class="top-nav">
+        <div class="nav-tabs">
+          <span class="tab active">Overview</span>
+          <span class="tab">Ladder</span>
+          <span class="tab">Browse</span>
+        </div>
+        <div class="nav-controls">
+          <div class="search-bar">
+            <v-icon size="16" color="#8E9297">mdi-magnify</v-icon>
+            <input type="text" placeholder="Search in Fortnite..." />
+          </div>
+          <div class="user-controls">
+            <v-icon size="20" color="#FFFFFF">mdi-bell</v-icon>
+            <v-icon size="20" color="#FFFFFF">mdi-cog</v-icon>
+            <span class="username-display">Erik Packmans</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Game Section -->
+      <div class="featured-game">
+        <div class="game-header">
+          <div class="game-info">
+            <div class="game-logo">
+              <img
+                src="https://via.placeholder.com/80x120/FF6B35/FFFFFF?text=FORT"
+                alt="Fortnite"
+              />
+            </div>
+            <div class="game-details">
+              <div class="game-badges">
+                <span class="age-rating">16</span>
+                <span class="platform-badge">PC</span>
+              </div>
+              <h1 class="game-title">COMPETE IN<br />FORTNITE BATTLE ROYALE</h1>
+              <p class="game-description">
+                Join millions in the ultimate battle for victory
+              </p>
+
+              <div class="game-stats">
+                <div class="stat">
+                  <div class="stat-number">3200</div>
+                  <div class="stat-label">Matches played</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-number">295</div>
+                  <div class="stat-label">Tournament wins</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="game-character">
+            <div class="character-showcase">
+              <img
+                src="https://via.placeholder.com/300x400/8B5CF6/FFFFFF?text=CHARACTER"
+                alt="Fortnite Character"
+              />
+              <div class="level-badge">
+                <span class="level-number">585</span>
+                <div class="level-icons">
+                  <v-icon size="16" color="#FFD700">mdi-star</v-icon>
+                  <v-icon size="16" color="#FFD700">mdi-trophy</v-icon>
+                  <v-icon size="16" color="#FFD700">mdi-crown</v-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Tournaments Section -->
+      <div class="tournaments-section">
+        <h2 class="section-title">FEATURED TOURNAMENTS</h2>
+        <p class="section-subtitle">
+          Participate in tournaments and earn prizes
+        </p>
+
+        <div class="tournaments-grid">
+          <div
+            class="tournament-card"
+            v-for="(tournament, index) in featuredTournaments"
+            :key="index"
+          >
+            <div class="tournament-image">
+              <img :src="tournament.image" :alt="tournament.title" />
+              <div
+                class="tournament-status"
+                :class="tournament.status.toLowerCase()"
+              >
+                {{ tournament.status }}
+              </div>
+            </div>
+
+            <div class="tournament-content">
+              <h3 class="tournament-title">{{ tournament.title }}</h3>
+              <p class="tournament-description">{{ tournament.description }}</p>
+
+              <div class="tournament-meta">
+                <div class="tournament-prize">
+                  <span class="prize-amount">${{ tournament.prize }}</span>
+                  <v-btn
+                    class="join-btn"
+                    size="small"
+                    :color="tournament.buttonColor"
+                    variant="flat"
+                  >
+                    Join Tournament
+                  </v-btn>
+                </div>
+              </div>
+
+              <div class="tournament-participants">
+                <div class="participant-avatars">
+                  <v-avatar
+                    v-for="n in 4"
+                    :key="n"
+                    size="24"
+                    class="participant-avatar"
+                    :class="{ 'avatar-overlap': n > 1 }"
+                  >
+                    <v-img
+                      :src="`https://via.placeholder.com/24x24/${
+                        tournament.avatarColors[n - 1]
+                      }/FFFFFF?text=${n}`"
+                    ></v-img>
+                  </v-avatar>
+                </div>
+                <span class="participant-count"
+                  >{{ tournament.participants }} others</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upcoming Section -->
+      <div class="upcoming-section">
+        <div class="section-header">
+          <h2 class="section-title">UPCOMING</h2>
+          <div class="section-controls">
+            <v-icon size="20" color="#8E9297">mdi-chevron-left</v-icon>
+            <v-icon size="20" color="#8E9297">mdi-chevron-right</v-icon>
+          </div>
+        </div>
+        <p class="section-subtitle">Discover the upcoming competitions</p>
+
+        <div class="upcoming-events">
+          <div
+            class="event-card"
+            v-for="(event, index) in upcomingEvents"
+            :key="index"
+          >
+            <div class="event-image">
+              <img :src="event.image" :alt="event.title" />
+            </div>
+            <div class="event-info">
+              <h4 class="event-title">{{ event.title }}</h4>
+              <p class="event-date">{{ event.date }}</p>
+              <div class="event-participants">
+                <span class="participant-count"
+                  >{{ event.participants }} participants</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref } from "vue";
+
+const featuredTournaments = ref([
+  {
+    title: "Val Highlights Tournament",
+    description:
+      "Compete with your friends in this winner-take-all tournament.",
+    prize: "1,500",
+    status: "LIVE",
+    buttonColor: "#FF6B35",
+    image: "https://via.placeholder.com/280x160/FF6B6B/FFFFFF?text=VALORANT",
+    participants: "127,2k",
+    avatarColors: ["FF6B6B", "4ECDC4", "45B7D1", "96CEB4"],
+  },
+  {
+    title: "Another Tournament Title",
+    description: "One more recent to running again and well get started...",
+    prize: "2,800",
+    status: "STARTING",
+    buttonColor: "#4ECDC4",
+    image: "https://via.placeholder.com/280x160/4ECDC4/FFFFFF?text=APEX",
+    participants: "89,1k",
+    avatarColors: ["4ECDC4", "FFD93D", "FF6B6B", "45B7D1"],
+  },
+  {
+    title: "Fortnite Epic Challenge",
+    description:
+      "The epic edition of events gives you the ultimate gaming experience.",
+    prize: "5,200",
+    status: "UPCOMING",
+    buttonColor: "#8B5CF6",
+    image: "https://via.placeholder.com/280x160/8B5CF6/FFFFFF?text=FORTNITE",
+    participants: "156,8k",
+    avatarColors: ["8B5CF6", "FF6B6B", "4ECDC4", "FFD93D"],
+  },
+  {
+    title: "Guns N Glory Championship",
+    description:
+      "Manage your crew all in guns blazers-kingdom with this epic tournament.",
+    prize: "7,800",
+    status: "FEATURED",
+    buttonColor: "#FFD93D",
+    image: "https://via.placeholder.com/280x160/FFD93D/FFFFFF?text=GUNS",
+    participants: "234,5k",
+    avatarColors: ["FFD93D", "8B5CF6", "FF6B6B", "4ECDC4"],
+  },
+]);
+
+const upcomingEvents = ref([
+  {
+    title: "CS2 Major Championship",
+    date: "Sept 15, 2024",
+    participants: "2,400",
+    image: "https://via.placeholder.com/200x120/FF8C00/FFFFFF?text=CS2",
+  },
+  {
+    title: "League of Legends Worlds",
+    date: "Sept 20, 2024",
+    participants: "15,600",
+    image: "https://via.placeholder.com/200x120/C89B3C/FFFFFF?text=LOL",
+  },
+]);
+</script>
+
+<style scoped>
+.gaming-platform {
+  display: flex;
+  min-height: 100vh;
+  background: #0f0f0f;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #ffffff;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 240px;
+  background: #1a1d23;
+  border-right: 1px solid #2c3036;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  padding: 16px;
+  border-bottom: 1px solid #2c3036;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar-wrapper {
+  position: relative;
+}
+
+.user-avatar {
+  border: 2px solid #5865f2;
+}
+
+.online-dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  background: #23a55a;
+  border: 2px solid #1a1d23;
+  border-radius: 50%;
+}
+
+.user-info .username {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.user-status {
+  font-size: 12px;
+  color: #8e9297;
+  margin: 0;
+}
+
+/* Navigation Styles */
+.sidebar-nav {
+  flex: 1;
+  padding: 16px 0;
+}
+
+.nav-section {
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #8e9297;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  padding: 0 16px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  margin: 2px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  color: #8e9297;
+}
+
+.nav-item.active {
+  background: #5865f2;
+  color: #ffffff;
+}
+
+.nav-item:hover:not(.active) {
+  background: #35393f;
+  color: #dcddde;
+}
+
+.nav-badge {
+  margin-left: auto;
+  background: #5865f2;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.sidebar-bottom {
+  padding: 16px;
+  border-top: 1px solid #2c3036;
+}
+
+.premium-btn {
+  width: 100%;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Main Content Styles */
+.main-content {
+  flex: 1;
+  margin-left: 240px;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1d23 100%);
+}
+
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: #1a1d23;
+  border-bottom: 1px solid #2c3036;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 32px;
+}
+
+.tab {
+  font-size: 14px;
+  font-weight: 500;
+  color: #8e9297;
+  cursor: pointer;
+  padding: 8px 0;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.tab.active {
+  color: #ffffff;
+  border-bottom-color: #5865f2;
+}
+
+.tab:hover:not(.active) {
+  color: #dcddde;
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #2c3036;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.search-bar:focus-within {
+  border-color: #5865f2;
+}
+
+.search-bar input {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  width: 200px;
+}
+
+.search-bar input::placeholder {
+  color: #8e9297;
+}
+
+.user-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.username-display {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+/* Featured Game Section */
+.featured-game {
+  padding: 32px 24px;
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.game-info {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex: 1;
+}
+
+.game-logo img {
+  width: 80px;
+  height: 120px;
+  border-radius: 8px;
+}
+
+.game-badges {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.age-rating,
+.platform-badge {
+  background: rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.game-title {
+  font-size: 36px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  margin: 0 0 8px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.game-description {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 24px 0;
+}
+
+.game-stats {
+  display: flex;
+  gap: 32px;
+}
+
+.stat {
+  text-align: left;
+}
+
+.stat-number {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.game-character {
+  position: relative;
+}
+
+.character-showcase {
+  position: relative;
+}
+
+.character-showcase img {
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.level-badge {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.level-number {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.level-icons {
+  display: flex;
+  gap: 4px;
+}
+
+/* Tournaments Section */
+.tournaments-section {
+  padding: 32px 24px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.section-subtitle {
+  font-size: 16px;
+  color: #8e9297;
+  margin: 0 0 32px 0;
+}
+
+.tournaments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.tournament-card {
+  background: #1a1d23;
+  border: 1px solid #2c3036;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.tournament-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border-color: #5865f2;
+}
+
+.tournament-image {
+  position: relative;
+}
+
+.tournament-image img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.tournament-status {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tournament-status.live {
+  background: #ff4655;
+  color: #ffffff;
+}
+
+.tournament-status.starting {
+  background: #ffd93d;
+  color: #000000;
+}
+
+.tournament-status.upcoming {
+  background: #8b5cf6;
+  color: #ffffff;
+}
+
+.tournament-status.featured {
+  background: #00d4aa;
+  color: #000000;
+}
+
+.tournament-content {
+  padding: 20px;
+}
+
+.tournament-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+}
+
+.tournament-description {
+  font-size: 14px;
+  color: #8e9297;
+  line-height: 1.4;
+  margin: 0 0 20px 0;
+}
+
+.tournament-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.prize-amount {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.join-btn {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tournament-participants {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.participant-avatars {
+  display: flex;
+}
+
+.participant-avatar {
+  border: 2px solid #1a1d23;
+}
+
+.avatar-overlap {
+  margin-left: -8px;
+}
+
+.participant-count {
+  font-size: 14px;
+  color: #8e9297;
+}
+
+/* Upcoming Section */
+.upcoming-section {
+  padding: 32px 24px;
+  background: #1a1d23;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.section-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.upcoming-events {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding: 16px 0;
+}
+
+.event-card {
+  min-width: 200px;
+  background: #2c3036;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.event-card:hover {
+  transform: scale(1.02);
+}
+
+.event-image img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.event-info {
+  padding: 16px;
+}
+
+.event-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+}
+
+.event-date {
+  font-size: 12px;
+  color: #8e9297;
+  margin: 0 0 8px 0;
+}
+
+.event-participants .participant-count {
+  font-size: 12px;
+  color: #8e9297;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .main-content {
+    margin-left: 200px;
+  }
+
+  .game-header {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .tournaments-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .upcoming-events {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .game-title {
+    font-size: 24px;
+  }
+
+  .character-showcase img {
+    width: 200px;
+    height: 300px;
+  }
+}
+</style>
