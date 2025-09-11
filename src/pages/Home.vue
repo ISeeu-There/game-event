@@ -10,8 +10,8 @@
                 src="https://via.placeholder.com/40x40/5865F2/FFFFFF?text=EP"
                 alt="User"
               ></v-img>
-              <div class="online-dot"></div>
             </v-avatar>
+            <div class="online-dot"></div>
           </div>
           <div class="user-info">
             <h3 class="username">Epic Packmans</h3>
@@ -57,7 +57,7 @@
             <span>Esports</span>
           </div>
           <div class="nav-item">
-            <v-icon size="20" color="#8E9297">mdi-discord</v-icon>
+            <v-icon size="20" color="#8E9297">mdi-cog</v-icon>
             <span>Settings</span>
           </div>
           <div class="nav-item">
@@ -81,7 +81,13 @@
         </div>
       </div>
     </div>
-
+    <!-- bg Section -->
+    <div class="fixed-bg-video">
+      <video autoplay muted loop playsinline class="bg-video">
+        <source src="../assets/bg.mp4" type="video/mp4" />
+      </video>
+      <div class="video-overlay"></div>
+    </div>
     <!-- Main Content Area -->
     <div class="main-content">
       <!-- Top Navigation Bar -->
@@ -98,64 +104,57 @@
           </div>
           <div class="user-controls">
             <v-icon size="20" color="#FFFFFF">mdi-bell</v-icon>
-            <v-icon size="20" color="#FFFFFF">mdi-cog</v-icon>
             <span class="username-display">Erik Packmans</span>
           </div>
         </div>
       </div>
 
       <!-- Featured Game Section -->
-      <div class="featured-game">
-        <div class="game-header">
-          <div class="game-info">
-            <div class="game-logo">
-              <img
-                src="https://via.placeholder.com/80x120/FF6B35/FFFFFF?text=FORT"
-                alt="Fortnite"
-              />
-            </div>
-            <div class="game-details">
-              <div class="game-badges">
-                <span class="age-rating">16</span>
-                <span class="platform-badge">PC</span>
-              </div>
-              <h1 class="game-title">COMPETE IN<br />FORTNITE BATTLE ROYALE</h1>
-              <p class="game-description">
-                Join millions in the ultimate battle for victory
-              </p>
 
-              <div class="game-stats">
-                <div class="stat">
+      <div class="game-header">
+        <div class="game-info">
+          <div class="game-logo"></div>
+
+          <div class="game-details">
+            <h1 class="game-title">ALL Tournaments States</h1>
+            <p class="game-description">
+              Join millions in the ultimate battle for victory
+            </p>
+
+            <!-- Game Stats as Cards -->
+            <div class="game-stats">
+              <!-- Matches Played -->
+              <v-card class="stat-card" elevation="6">
+                <v-card-text class="text-center">
                   <div class="stat-number">3200</div>
                   <div class="stat-label">Matches played</div>
-                </div>
-                <div class="stat">
+                </v-card-text>
+              </v-card>
+
+              <!-- Tournament Wins -->
+              <v-card class="stat-card" elevation="6">
+                <v-card-text class="text-center">
                   <div class="stat-number">295</div>
                   <div class="stat-label">Tournament wins</div>
-                </div>
-              </div>
-            </div>
-          </div>
+                </v-card-text>
+              </v-card>
 
-          <div class="game-character">
-            <div class="character-showcase">
-              <img
-                src="https://via.placeholder.com/300x400/8B5CF6/FFFFFF?text=CHARACTER"
-                alt="Fortnite Character"
-              />
-              <div class="level-badge">
-                <span class="level-number">585</span>
-                <div class="level-icons">
-                  <v-icon size="16" color="#FFD700">mdi-star</v-icon>
-                  <v-icon size="16" color="#FFD700">mdi-trophy</v-icon>
-                  <v-icon size="16" color="#FFD700">mdi-crown</v-icon>
-                </div>
-              </div>
+              <!-- Level Badge -->
+              <v-card class="stat-card winrate-card" elevation="6">
+                <v-card-text class="text-center">
+                  <span class="winrate-number">92.1%</span>
+                  <div class="winrate-icons flex justify-center gap-2 mt-2">
+                    <v-icon size="20" color="#00FF88">mdi-chart-line</v-icon>
+                    <v-icon size="20" color="#00FF88">mdi-trending-up</v-icon>
+                    <v-icon size="20" color="#00FF88">mdi-target</v-icon>
+                  </div>
+                  <div class="stat-label mt-1">Win Rate</div>
+                </v-card-text>
+              </v-card>
             </div>
           </div>
         </div>
       </div>
-
       <!-- Featured Tournaments Section -->
       <div class="tournaments-section">
         <h2 class="section-title">FEATURED TOURNAMENTS</h2>
@@ -192,7 +191,7 @@
                     :color="tournament.buttonColor"
                     variant="flat"
                   >
-                    Join Tournament
+                    {{ tournament.jointournament }}
                   </v-btn>
                 </div>
               </div>
@@ -260,28 +259,33 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-
+import lol from "../assets/league.jpg";
+import fortnite from "../assets/fortnite.jpg";
+import live from "../assets/live.jpg";
+import war from "../assets/war.jpg";
 const featuredTournaments = ref([
   {
-    title: "Val Highlights Tournament",
+    title: "Go Live Tournament",
     description:
       "Compete with your friends in this winner-take-all tournament.",
     prize: "1,500",
     status: "LIVE",
     buttonColor: "#FF6B35",
-    image: "https://via.placeholder.com/280x160/FF6B6B/FFFFFF?text=VALORANT",
+    image: live,
     participants: "127,2k",
     avatarColors: ["FF6B6B", "4ECDC4", "45B7D1", "96CEB4"],
+    jointournament: "Go Live",
   },
   {
-    title: "Another Tournament Title",
+    title: "League Of legends Tournaments",
     description: "One more recent to running again and well get started...",
     prize: "2,800",
     status: "STARTING",
     buttonColor: "#4ECDC4",
-    image: "https://via.placeholder.com/280x160/4ECDC4/FFFFFF?text=APEX",
+    image: lol,
     participants: "89,1k",
     avatarColors: ["4ECDC4", "FFD93D", "FF6B6B", "45B7D1"],
+    jointournament: "Join Now",
   },
   {
     title: "Fortnite Epic Challenge",
@@ -290,9 +294,10 @@ const featuredTournaments = ref([
     prize: "5,200",
     status: "UPCOMING",
     buttonColor: "#8B5CF6",
-    image: "https://via.placeholder.com/280x160/8B5CF6/FFFFFF?text=FORTNITE",
+    image: fortnite,
     participants: "156,8k",
     avatarColors: ["8B5CF6", "FF6B6B", "4ECDC4", "FFD93D"],
+    jointournament: "Join Now",
   },
   {
     title: "Guns N Glory Championship",
@@ -301,9 +306,10 @@ const featuredTournaments = ref([
     prize: "7,800",
     status: "FEATURED",
     buttonColor: "#FFD93D",
-    image: "https://via.placeholder.com/280x160/FFD93D/FFFFFF?text=GUNS",
+    image: war,
     participants: "234,5k",
     avatarColors: ["FFD93D", "8B5CF6", "FF6B6B", "4ECDC4"],
+    jointournament: "Soon",
   },
 ]);
 
@@ -312,13 +318,15 @@ const upcomingEvents = ref([
     title: "CS2 Major Championship",
     date: "Sept 15, 2024",
     participants: "2,400",
-    image: "https://via.placeholder.com/200x120/FF8C00/FFFFFF?text=CS2",
+    image:
+      "https://www.dexerto.com/cdn-image/wp-content/uploads/2022/11/16/major-winners-champions.jpg",
   },
   {
     title: "League of Legends Worlds",
     date: "Sept 20, 2024",
     participants: "15,600",
-    image: "https://via.placeholder.com/200x120/C89B3C/FFFFFF?text=LOL",
+    image:
+      "https://cdn.sanity.io/images/zoz4y99f/production/13ce689b9954f0401c6367f8829963fed9efdfd6-1600x900.jpg?w=1600&auto=format",
   },
 ]);
 </script>
@@ -372,11 +380,12 @@ const upcomingEvents = ref([
   background: #23a55a;
   border: 2px solid #1a1d23;
   border-radius: 50%;
+  z-index: 10;
 }
 
 .user-info .username {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 10;
   color: #ffffff;
   margin: 0;
 }
@@ -399,7 +408,7 @@ const upcomingEvents = ref([
 
 .section-title {
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 10;
   color: #8e9297;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -435,7 +444,7 @@ const upcomingEvents = ref([
   background: #5865f2;
   color: #ffffff;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 10;
   padding: 2px 6px;
   border-radius: 10px;
   min-width: 18px;
@@ -449,7 +458,7 @@ const upcomingEvents = ref([
 
 .premium-btn {
   width: 100%;
-  font-weight: 600;
+  font-weight: 10;
   text-transform: none;
   letter-spacing: 0;
 }
@@ -477,7 +486,7 @@ const upcomingEvents = ref([
 
 .tab {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 10;
   color: #8e9297;
   cursor: pointer;
   padding: 8px 0;
@@ -536,23 +545,69 @@ const upcomingEvents = ref([
 
 .username-display {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 10;
   color: #ffffff;
 }
 
 /* Featured Game Section */
 .featured-game {
-  padding: 32px 24px;
-  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  padding: 300px 24px;
   position: relative;
   overflow: hidden;
 }
+/* Fixed Background Video */
+.fixed-bg-video {
+  position: fixed;
+  top: 0;
+  left: 240px; /* Account for sidebar width */
+  width: calc(100% - 240px);
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+}
 
+.bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* Optional: add dark overlay */
+  z-index: 1;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 240px;
+  background: transparent;
+  position: relative;
+  z-index: 2;
+}
+
+.tournaments-section {
+  padding: 32px 24px;
+  background: rgba(15, 15, 15, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.upcoming-section {
+  padding: 32px 24px;
+  background: rgba(26, 29, 35, 0.95);
+  backdrop-filter: blur(10px);
+}
 .game-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
+  margin-top: 400px;
+
   z-index: 2;
 }
 
@@ -580,7 +635,7 @@ const upcomingEvents = ref([
   background: rgba(0, 0, 0, 0.3);
   color: #ffffff;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 10;
   padding: 4px 8px;
   border-radius: 4px;
   text-transform: uppercase;
@@ -588,11 +643,11 @@ const upcomingEvents = ref([
 
 .game-title {
   font-size: 36px;
-  font-weight: 800;
+  font-weight: 10;
   color: #ffffff;
   line-height: 1.1;
   margin: 0 0 8px 0;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.959);
 }
 
 .game-description {
@@ -600,26 +655,89 @@ const upcomingEvents = ref([
   color: rgba(255, 255, 255, 0.8);
   margin: 0 0 24px 0;
 }
+.game-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: center;
+  margin-top: -100px;
+  width: 100%;
+}
 
 .game-stats {
   display: flex;
-  gap: 32px;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
-.stat {
-  text-align: left;
+.stat-card {
+  flex: 1;
+  max-width: 200px;
+  height: 80px;
+  margin-bottom: 20px;
+  color: white;
+  font-weight: 10;
+  text-align: center;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);
+  animation: float 3s ease-in-out infinite;
+}
+.stat-card:nth-child(1) {
+  animation-delay: 0s;
+}
+.stat-card:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.stat-card:nth-child(3) {
+  animation-delay: 0.6s;
 }
 
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+.stat-card:hover {
+  background-color: #00d4aa;
+  transition: 0.5;
+}
+.winrate-card {
+  background: linear-gradient(135deg, #1f3a2e, #2d5a3f);
+}
+
+.winrate-number {
+  font-size: 22px;
+  font-weight: 10;
+  color: #00ff88;
+}
 .stat-number {
   font-size: 24px;
-  font-weight: 700;
-  color: #ffffff;
-  line-height: 1;
+  font-weight: bold;
 }
 
 .stat-label {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
+  opacity: 0.8;
+}
+
+.level-card {
+  background: linear-gradient(135deg, #2d1f3d, #4b2a63);
+}
+
+.level-number {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffd700;
 }
 
 .game-character {
@@ -653,7 +771,7 @@ const upcomingEvents = ref([
 
 .level-number {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 10;
 }
 
 .level-icons {
@@ -668,7 +786,7 @@ const upcomingEvents = ref([
 
 .section-title {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 10;
   color: #ffffff;
   margin: 0 0 8px 0;
   text-transform: uppercase;
@@ -719,7 +837,7 @@ const upcomingEvents = ref([
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 10;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -750,7 +868,7 @@ const upcomingEvents = ref([
 
 .tournament-title {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 10;
   color: #ffffff;
   margin: 0 0 8px 0;
 }
@@ -768,18 +886,24 @@ const upcomingEvents = ref([
   align-items: center;
   margin-bottom: 16px;
 }
-
+.tournament-prize {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
 .prize-amount {
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 10;
   color: #ffffff;
 }
 
 .join-btn {
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 10;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  margin-left: 10px;
 }
 
 .tournament-participants {
@@ -854,7 +978,7 @@ const upcomingEvents = ref([
 
 .event-title {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 10;
   color: #ffffff;
   margin: 0 0 4px 0;
 }

@@ -1,16 +1,19 @@
 <template>
   <v-app>
-    <v-app-bar app color="blue-darken-3" dark>
-      <v-toolbar-title>Event Organizer</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn to="/" variant="text">Home</v-btn>
-      <v-btn to="/events" variant="text">Events</v-btn>
-      <v-btn to="/contact" variant="text">Contact</v-btn>
-    </v-app-bar>
-
     <v-main>
       <router-view />
     </v-main>
   </v-app>
 </template>
 <script setup lang="ts"></script>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Jaro:opsz@6..72&family=Luckiest+Guy&display=swap");
+.v-application {
+  font-family: "jaro", sans-serif !important;
+}
+
+/* Test with even more specificity */
+.v-application * {
+  font-family: "jaro", sans-serif !important;
+}
+</style>
