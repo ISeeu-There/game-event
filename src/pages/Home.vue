@@ -1,15 +1,12 @@
 <template>
   <div class="gaming-platform">
-    <!-- Left Sidebar -->
-    <div class="sidebar">
+    <!-- Sidebar -->
+    <div class="sidebar" :class="{ active: isSidebarOpen }">
       <div class="sidebar-header">
         <div class="user-profile">
           <div class="avatar-wrapper">
             <v-avatar size="40" class="user-avatar">
-              <v-img
-                src="https://via.placeholder.com/40x40/5865F2/FFFFFF?text=EP"
-                alt="User"
-              ></v-img>
+              <v-img alt="User" />
             </v-avatar>
             <div class="online-dot"></div>
           </div>
@@ -69,34 +66,42 @@
 
       <!-- Bottom Section -->
       <div class="sidebar-bottom">
-        <div class="get-started-btn">
-          <v-btn
-            class="premium-btn"
-            size="small"
-            color="#00D4AA"
-            variant="flat"
-          >
-            Get Started
-          </v-btn>
-        </div>
+        <v-btn class="premium-btn" size="small" color="#00D4AA" variant="flat">
+          Get Started
+        </v-btn>
       </div>
     </div>
-    <!-- bg Section -->
+    <!-- Overlay (only visible when open) -->
+    <transition name="fade">
+      <div v-if="isSidebarOpen" class="overlay" @click="toggleSidebar"></div>
+    </transition>
+    <!-- Background Section -->
     <div class="fixed-bg-video">
       <video autoplay muted loop playsinline class="bg-video">
         <source src="../assets/bg.mp4" type="video/mp4" />
       </video>
       <div class="video-overlay"></div>
     </div>
-    <!-- Main Content Area -->
+
+    <!-- Main Content -->
     <div class="main-content">
-      <!-- Top Navigation Bar -->
+      <!-- Top Navigation -->
       <div class="top-nav">
+        <!-- Hamburger for mobile -->
+        <v-btn
+          icon
+          variant="text"
+          class="sidebar-toggle"
+          @click="toggleSidebar"
+        >
+          <v-icon size="28" color="#FFFFFF">mdi-menu</v-icon>
+        </v-btn>
         <div class="nav-tabs">
           <span class="tab active">Overview</span>
           <span class="tab">Ladder</span>
           <span class="tab">Browse</span>
         </div>
+
         <div class="nav-controls">
           <div class="search-bar">
             <v-icon size="16" color="#8E9297">mdi-magnify</v-icon>
@@ -109,21 +114,18 @@
         </div>
       </div>
 
-      <!-- Featured Game Section -->
-
+      <!-- Game Header -->
       <div class="game-header">
         <div class="game-info">
           <div class="game-logo"></div>
-
           <div class="game-details">
             <h1 class="game-title">ALL Tournaments States</h1>
             <p class="game-description">
               Join millions in the ultimate battle for victory
             </p>
 
-            <!-- Game Stats as Cards -->
+            <!-- Stats -->
             <div class="game-stats">
-              <!-- Matches Played -->
               <v-card class="stat-card" elevation="6">
                 <v-card-text class="text-center">
                   <div class="stat-number">3200</div>
@@ -131,7 +133,6 @@
                 </v-card-text>
               </v-card>
 
-              <!-- Tournament Wins -->
               <v-card class="stat-card" elevation="6">
                 <v-card-text class="text-center">
                   <div class="stat-number">295</div>
@@ -139,7 +140,6 @@
                 </v-card-text>
               </v-card>
 
-              <!-- Level Badge -->
               <v-card class="stat-card winrate-card" elevation="6">
                 <v-card-text class="text-center">
                   <span class="winrate-number">92.1%</span>
@@ -155,7 +155,8 @@
           </div>
         </div>
       </div>
-      <!-- Featured Tournaments Section -->
+
+      <!-- Featured Tournaments -->
       <div class="tournaments-section">
         <h2 class="section-title">FEATURED TOURNAMENTS</h2>
         <p class="section-subtitle">
@@ -180,7 +181,9 @@
 
             <div class="tournament-content">
               <h3 class="tournament-title">{{ tournament.title }}</h3>
-              <p class="tournament-description">{{ tournament.description }}</p>
+              <p class="tournament-description">
+                {{ tournament.description }}
+              </p>
 
               <div class="tournament-meta">
                 <div class="tournament-prize">
@@ -205,11 +208,11 @@
                     class="participant-avatar"
                     :class="{ 'avatar-overlap': n > 1 }"
                   >
-                    <v-img
+                    <!-- <v-img
                       :src="`https://via.placeholder.com/24x24/${
                         tournament.avatarColors[n - 1]
                       }/FFFFFF?text=${n}`"
-                    ></v-img>
+                    /> -->
                   </v-avatar>
                 </div>
                 <span class="participant-count"
@@ -221,7 +224,7 @@
         </div>
       </div>
 
-      <!-- Upcoming Section -->
+      <!-- Upcoming -->
       <div class="upcoming-section">
         <div class="section-header">
           <h2 class="section-title">UPCOMING</h2>
@@ -263,6 +266,12 @@ import lol from "../assets/league.jpg";
 import fortnite from "../assets/fortnite.jpg";
 import live from "../assets/live.jpg";
 import war from "../assets/war.jpg";
+
+const isSidebarOpen = ref(false);
+function toggleSidebar() {
+  isSidebarOpen.value = !isSidebarOpen.value;
+}
+
 const featuredTournaments = ref([
   {
     title: "Go Live Tournament",
@@ -277,7 +286,7 @@ const featuredTournaments = ref([
     jointournament: "Go Live",
   },
   {
-    title: "League Of legends Tournaments",
+    title: "League Of Legends Tournaments",
     description: "One more recent to running again and well get started...",
     prize: "2,800",
     status: "STARTING",
@@ -330,7 +339,6 @@ const upcomingEvents = ref([
   },
 ]);
 </script>
-
 <style scoped>
 .gaming-platform {
   display: flex;
@@ -342,19 +350,47 @@ const upcomingEvents = ref([
 
 /* Sidebar Styles */
 .sidebar {
-  width: 240px;
-  background: #1a1d23;
-  border-right: 1px solid #2c3036;
-  display: flex;
-  flex-direction: column;
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
   height: 100vh;
-  overflow-y: auto;
+  background: #1a1d23;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+.sidebar.active {
+  transform: translateX(0);
 }
 
 .sidebar-header {
   padding: 16px;
   border-bottom: 1px solid #2c3036;
+}
+.sidebar-toggle {
+  display: none;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 900;
+  transition: 0.1;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
 }
 
 .user-profile {
@@ -559,17 +595,21 @@ const upcomingEvents = ref([
 .fixed-bg-video {
   position: fixed;
   top: 0;
-  left: 240px; /* Account for sidebar width */
-  width: calc(100% - 240px);
+  left: 100px;
+  width: 100%;
   height: 100vh;
   z-index: 0;
   overflow: hidden;
 }
 
 .bg-video {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
   object-fit: cover;
+  transform: translate(-50%, -50%);
 }
 
 .video-overlay {
@@ -684,6 +724,8 @@ const upcomingEvents = ref([
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(4px);
+  transition: background-color 0.5s ease;
+
   animation: float 3s ease-in-out infinite;
 }
 .stat-card:nth-child(1) {
@@ -709,10 +751,11 @@ const upcomingEvents = ref([
 }
 .stat-card:hover {
   background-color: #00d4aa;
-  transition: 0.5;
 }
 .winrate-card {
   background: linear-gradient(135deg, #1f3a2e, #2d5a3f);
+  max-width: 200px;
+  height: 80px;
 }
 
 .winrate-number {
@@ -722,7 +765,7 @@ const upcomingEvents = ref([
 }
 .stat-number {
   font-size: 24px;
-  font-weight: bold;
+  font-weight: 10;
 }
 
 .stat-label {
@@ -998,6 +1041,13 @@ const upcomingEvents = ref([
 @media (max-width: 768px) {
   .sidebar {
     width: 200px;
+    transform: translateX(-100%);
+  }
+  .sidebar.active {
+    transform: translateX(0);
+  }
+  .sidebar-toggle {
+    display: inline-flex; /* Vuetify btn uses flex, so inline-flex is better */
   }
 
   .main-content {
@@ -1035,6 +1085,124 @@ const upcomingEvents = ref([
   .character-showcase img {
     width: 200px;
     height: 300px;
+  }
+}
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -240px;
+    width: 220px;
+    height: 100vh;
+    transition: left 0.3s ease;
+    z-index: 1000;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+  .fixed-bg-video {
+    position: fixed;
+    top: 0;
+    left: -2px;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 50%;
+    min-height: 50%;
+    object-fit: cover;
+  }
+  .top-nav {
+    position: fixed;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 12px;
+    padding: 12px 16px;
+    z-index: 500;
+  }
+
+  .nav-tabs {
+    gap: 16px;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .search-bar input {
+    width: 120px;
+  }
+
+  .game-header {
+    flex-direction: column;
+    text-align: center;
+    margin-top: 200px;
+  }
+
+  .game-details {
+    align-items: center;
+    margin-top: 0;
+  }
+
+  .game-stats {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-card {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .tournaments-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .upcoming-events {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 12px;
+  }
+
+  .event-card {
+    min-width: 240px;
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-tabs {
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .search-bar input {
+    display: none;
+  }
+
+  .username-display {
+    display: none;
+  }
+
+  .game-title {
+    font-size: 20px;
+  }
+
+  .stat-number {
+    font-size: 20px;
+  }
+
+  .tournament-title {
+    font-size: 16px;
   }
 }
 </style>

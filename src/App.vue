@@ -12,7 +12,6 @@
   font-family: "jaro", sans-serif !important;
 }
 
-/* Test with even more specificity */
 .v-application * {
   font-family: "jaro", sans-serif !important;
 }
