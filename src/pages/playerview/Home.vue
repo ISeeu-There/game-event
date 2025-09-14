@@ -36,7 +36,7 @@
 import { ref } from "vue";
 import SideBarHeader from "../HomeElements/SideBarHeader.vue";
 import NavMenuSideBar from "../HomeElements/NavMenuSideBar.vue";
-import UpcomingEvents from "../HomeElements/upcomingEvents.vue";
+import UpcomingEvents from "../HomeElements/UpcomingEvents.vue";
 import GameHeader from "../HomeElements/GameHeader.vue";
 import FeaturedTournament from "../HomeElements/FeaturedTournament.vue";
 import TopNav from "../HomeElements/TopNav.vue";
