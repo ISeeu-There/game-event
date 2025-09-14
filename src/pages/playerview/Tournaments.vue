@@ -1440,9 +1440,15 @@ const getJoinButtonText = (status: string): string => {
   color: #8e9297;
   line-height: 1.4;
   margin: 0 0 16px 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
+
+  display: -webkit-box; /* old WebKit */
   -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* WebKit-specific */
+
+  display: box; /* legacy Firefox */
+  box-orient: vertical;
+  line-clamp: 2; /* future standard */
+
   overflow: hidden;
 }
 
