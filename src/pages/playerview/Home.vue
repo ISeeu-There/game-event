@@ -24,10 +24,10 @@
       <GameHeader />
 
       <!-- Featured Tournaments -->
-      <featuredTournament />
+      <FeaturedTournament />
       <!-- Upcoming -->
 
-      <UpcomingEvents />
+      <UpcomingEvent />
     </div>
   </div>
 </template>
@@ -36,10 +36,10 @@
 import { ref } from "vue";
 import SideBarHeader from "../HomeElements/SideBarHeader.vue";
 import NavMenuSideBar from "../HomeElements/NavMenuSideBar.vue";
-import UpcomingEvents from "../HomeElements/UpcomingEvents.vue";
 import GameHeader from "../HomeElements/GameHeader.vue";
 import FeaturedTournament from "../HomeElements/FeaturedTournament.vue";
 import TopNav from "../HomeElements/TopNav.vue";
+import UpcomingEvent from "../HomeElements/UpcomingEvent.vue";
 const isSidebarOpen = ref(false);
 function toggleSidebar() {
   isSidebarOpen.value = !isSidebarOpen.value;
