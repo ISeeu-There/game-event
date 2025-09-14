@@ -45,6 +45,9 @@ const props = defineProps<{
   display: flex;
   gap: 32px;
 }
+.sidebar-toggle {
+  display: none;
+}
 
 .tab {
   font-size: 14px;
@@ -120,6 +123,9 @@ const props = defineProps<{
     gap: 12px;
     padding: 12px 16px;
     z-index: 500;
+  }
+  .sidebar-toggle {
+    display: inline-flex;
   }
 
   .nav-tabs {
