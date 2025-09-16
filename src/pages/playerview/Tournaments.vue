@@ -2,20 +2,7 @@
   <div class="gaming-platform">
     <!-- Sidebar -->
     <div class="sidebar" :class="{ active: isSidebarOpen }">
-      <div class="sidebar-header">
-        <div class="user-profile">
-          <div class="avatar-wrapper">
-            <v-avatar size="40" class="user-avatar">
-              <v-img alt="User" />
-            </v-avatar>
-            <div class="online-dot"></div>
-          </div>
-          <div class="user-info">
-            <h3 class="username">Epic Packmans</h3>
-            <p class="user-status">Online</p>
-          </div>
-        </div>
-      </div>
+      <SideBarHeader />
 
       <!-- Navigation Menu -->
       <NavMenuSideBar />
@@ -29,59 +16,8 @@
     <!-- Main Content -->
     <div class="main-content">
       <!-- Top Navigation -->
-      <div class="top-nav">
-        <!-- Hamburger for mobile -->
-        <v-btn
-          icon
-          variant="text"
-          class="sidebar-toggle"
-          @click="toggleSidebar"
-        >
-          <v-icon size="28" color="#FFFFFF">mdi-menu</v-icon>
-        </v-btn>
+      <TopNav :toggleSidebar="toggleSidebar" />
 
-        <div class="nav-tabs">
-          <span
-            class="tab"
-            :class="{ active: activeTab === 'all' }"
-            @click="activeTab = 'all'"
-            >All Tournaments</span
-          >
-          <span
-            class="tab"
-            :class="{ active: activeTab === 'live' }"
-            @click="activeTab = 'live'"
-            >Live</span
-          >
-          <span
-            class="tab"
-            :class="{ active: activeTab === 'upcoming' }"
-            @click="activeTab = 'upcoming'"
-            >Upcoming</span
-          >
-          <span
-            class="tab"
-            :class="{ active: activeTab === 'featured' }"
-            @click="activeTab = 'featured'"
-            >Featured</span
-          >
-        </div>
-
-        <div class="nav-controls">
-          <div class="search-bar">
-            <v-icon size="16" color="#8E9297">mdi-magnify</v-icon>
-            <input
-              type="text"
-              placeholder="Search tournaments..."
-              v-model="searchQuery"
-            />
-          </div>
-          <div class="user-controls">
-            <v-icon size="20" color="#FFFFFF">mdi-bell</v-icon>
-            <span class="username-display">Erik Packmans</span>
-          </div>
-        </div>
-      </div>
       <!-- Background Section -->
       <div class="fixed-bg-video">
         <video autoplay muted loop playsinline class="bg-video">
@@ -366,6 +302,8 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import NavMenuSideBar from "../HomeElements/NavMenuSideBar.vue";
+import TopNav from "../HomeElements/TopNav.vue";
+import SideBarHeader from "../HomeElements/SideBarHeader.vue";
 
 interface Tournament {
   id: number;
