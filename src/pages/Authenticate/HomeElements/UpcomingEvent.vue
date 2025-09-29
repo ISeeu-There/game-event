@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { comingEvents } from "../../components/upcomingEvents";
+import { comingEvents } from "../../../components/upcomingEvents";
 </script>
 
 <style scoped>

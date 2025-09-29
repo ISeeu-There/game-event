@@ -66,7 +66,7 @@
 </template>
 
 <script setup lang="ts">
-import { featuredTournaments } from "../../components/featuredTournaments";
+import { featuredTournaments } from "../../../components/featuredTournaments";
 </script>
 
 <style scoped>

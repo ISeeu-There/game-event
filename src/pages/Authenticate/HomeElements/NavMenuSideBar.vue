@@ -15,7 +15,8 @@
           :key="item.id"
           :to="item.to"
           class="nav-item"
-          :class="{ active: item.active }"
+          active-class="active"
+          exact-active-class="active"
           style="text-decoration: none"
         >
           <v-icon size="20" color="#8E9297">{{ item.icon }}</v-icon>
@@ -25,7 +26,8 @@
       </div>
       <div class="sidebar-bottom">
         <v-btn class="premium-btn" size="small" color="#00D4AA" variant="flat">
-          Get Started
+          <v-icon color="red">mdi-logout</v-icon>
+          <span class="text-red ml-2"> Log Out</span>
         </v-btn>
       </div>
     </nav>
@@ -33,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { menuItems, type NavSection } from "../../components/navItems";
+import { menuItems, type NavSection } from "../../../components/navItems";
 </script>
 
 <style scoped lang="scss">
@@ -97,6 +99,9 @@ import { menuItems, type NavSection } from "../../components/navItems";
 }
 
 .premium-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   font-weight: 10;
   text-transform: none;
