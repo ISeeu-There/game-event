@@ -11,7 +11,7 @@
     <!-- Background Section -->
     <div class="fixed-bg-video">
       <video autoplay muted loop playsinline class="bg-video">
-        <source src="../../assets/bg.mp4" type="video/mp4" />
+        <source src="../../../assets/bg.mp4" type="video/mp4" />
       </video>
       <div class="video-overlay"></div>
     </div>
