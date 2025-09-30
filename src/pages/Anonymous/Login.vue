@@ -72,9 +72,10 @@
               </p>
             </div>
 
-            <v-form class="login-form">
+            <v-form class="login-form" @submit.prevent="handleLogin">
               <div class="form-group">
                 <v-text-field
+                  v-model="email"
                   label="Email Address"
                   type="email"
                   prepend-inner-icon="mdi-email"
@@ -82,11 +83,13 @@
                   density="comfortable"
                   class="custom-input mb-4"
                   color="white"
+                  :rules="[rules.required, rules.email]"
                 />
               </div>
 
               <div class="form-group">
                 <v-text-field
+                  v-model="password"
                   label="Password"
                   type="password"
                   prepend-inner-icon="mdi-lock"
@@ -94,6 +97,7 @@
                   density="comfortable"
                   class="custom-input mb-2"
                   color="white"
+                  :rules="[rules.required, rules.minPassword]"
                 />
               </div>
 
@@ -101,7 +105,13 @@
                 <a href="#" class="forgot-password-link"> Forgot password? </a>
               </div>
 
-              <v-btn block size="large" class="primary-btn mb-4" elevation="0">
+              <v-btn
+                type="submit"
+                block
+                size="large"
+                class="primary-btn mb-4"
+                elevation="0"
+              >
                 <v-icon left class="mr-5">mdi-login</v-icon>
                 Sign In
               </v-btn>
@@ -122,16 +132,48 @@
   </v-app>
 </template>
 
-<script setup>
-import { ref } from "vue";
+<script setup lang="ts">
+import { onMounted, ref } from "vue";
+import { auth } from "../../plugines/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useRouter } from "vue-router";
+const email = ref("");
+const password = ref("");
+const error = ref("");
+const router = useRouter();
 
 const features = ref([
   { icon: "mdi-speedometer", text: "Fast & Reliable" },
   { icon: "mdi-shield-lock", text: "Secure Access" },
   { icon: "mdi-devices", text: "Multi-Device Sync" },
 ]);
+const rules = {
+  required: (v: string) => !!v || "This field is required",
+  email: (v: string) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || "Must be a valid email",
+  minPassword: (v: string) =>
+    (v && v.length >= 6) || "Password must be at least 6 characters",
+};
+const handleLogin = async () => {
+  error.value = ""; // for reset error
 
-const getParticleStyle = (n) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email.value,
+      password.value
+    );
+    router.push("/u/dashboard");
+  } catch (err: any) {
+    error.value = err.message;
+  }
+};
+onMounted(() => {
+  if (auth.currentUser) {
+    router.push("/u/dashboard");
+  }
+});
+const getParticleStyle = (n: any) => {
   return {
     left: Math.random() * 100 + "%",
     top: Math.random() * 100 + "%",

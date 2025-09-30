@@ -25,9 +25,15 @@
         </router-link>
       </div>
       <div class="sidebar-bottom">
-        <v-btn class="premium-btn" size="small" color="#00D4AA" variant="flat">
-          <v-icon color="red">mdi-logout</v-icon>
-          <span class="text-red ml-2"> Log Out</span>
+        <v-btn
+          class="premium-btn"
+          size="small"
+          color="#00D4AA"
+          variant="flat"
+          @click="handleLogout"
+        >
+          <v-icon color="white">mdi-logout</v-icon>
+          <span class="text-white ml-2"> Log Out</span>
         </v-btn>
       </div>
     </nav>
@@ -35,7 +41,21 @@
 </template>
 
 <script setup lang="ts">
+import { tr } from "vuetify/locale";
 import { menuItems, type NavSection } from "../../../components/navItems";
+
+import { auth } from "../../../plugines/firebase";
+import { signOut } from "firebase/auth";
+import { useRouter } from "vue-router";
+const router = useRouter();
+const handleLogout = async () => {
+  try {
+    await signOut(auth);
+    router.push("/");
+  } catch (err: any) {
+    alert("Logout failed:");
+  }
+};
 </script>
 
 <style scoped lang="scss">
